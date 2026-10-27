@@ -1,194 +1,215 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#1c1018">
-  <title>Bahasa Cinta Kita ♡</title>
-  <meta name="description" content="Mini love language quiz untuk orang tersayang. Kenali cara kita memberi dan menerima cinta.">
-  <style>
-    :root{--bg:#130d12;--panel:#21151f;--panel2:#2b1a27;--pink:#ff8eae;--rose:#f65f91;--cream:#fff3f5;--muted:#c7aeb9;--line:#573347}
-    *{box-sizing:border-box} html{scroll-behavior:smooth}
-    body{margin:0;background:radial-gradient(ellipse at 80% 0%,#482238 0,transparent 36%),radial-gradient(ellipse at 0% 35%,#2e1829 0,transparent 32%),var(--bg);color:var(--cream);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.6}
-    button,input{font:inherit} button{cursor:pointer}
-    .wrap{width:min(1080px,92%);margin:auto}
-    nav{display:flex;align-items:center;justify-content:space-between;padding:24px 0}
-    .brand{font-weight:800;letter-spacing:.08em;font-size:.9rem}.brand span{color:var(--pink)}
-    .nav-note{color:var(--muted);font-size:.86rem}
-    .hero{min-height:70vh;display:grid;grid-template-columns:1.15fr .85fr;gap:42px;align-items:center;padding:55px 0 75px}
-    .eyebrow{color:var(--pink);font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;font-weight:800}
-    h1{font-size:clamp(3rem,7vw,6.5rem);line-height:.98;letter-spacing:-.065em;margin:18px 0 24px}
-    h1 em{font-family:Georgia,serif;font-weight:400;color:var(--pink)}
-    .lead{font-size:1.08rem;color:#e4cfd8;max-width:590px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-    .btn{border:1px solid var(--line);border-radius:999px;padding:13px 21px;font-weight:750;transition:.2s}
-    .btn-primary{background:var(--pink);color:#29111d;border-color:var(--pink)}.btn-primary:hover{background:#ffb0c4;transform:translateY(-2px)}
-    .btn-ghost{background:transparent;color:var(--cream)}.btn-ghost:hover{background:#ffffff0b}
-    .love-card{position:relative;border:1px solid #75405b;background:linear-gradient(145deg,#3b2033,#1b121c 75%);border-radius:28px;padding:32px;min-height:390px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;box-shadow:0 25px 80px #0005}
-    .love-card:before{content:"♡";position:absolute;right:-15px;top:-72px;font-size:20rem;color:#ff8eae0d;line-height:1}
-    .tiny{font-size:.78rem;letter-spacing:.14em;color:var(--pink);text-transform:uppercase}
-    .quote{font-family:Georgia,serif;font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.22;position:relative}
-    .signature{color:var(--muted);font-size:.9rem}
-    section{padding:60px 0}
-    .section-head{max-width:650px;margin-bottom:28px}.section-head h2{font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.04em;line-height:1.08;margin:10px 0}
-    .section-head p{color:var(--muted)}
-    .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .step,.quiz-panel,.result{background:#21151fd9;border:1px solid var(--line);border-radius:20px;padding:22px}
-    .step-num{color:var(--pink);font-size:.8rem;font-weight:800;letter-spacing:.12em}.step h3{margin:8px 0}.step p{color:var(--muted);font-size:.94rem;margin-bottom:0}
-    .quiz-panel{padding:clamp(20px,4vw,38px)}
-    .quiz-top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:16px}
-    .pill{border:1px solid var(--line);border-radius:99px;padding:5px 11px;color:var(--pink);font-size:.78rem}
-    .progress{height:5px;background:#42283a;border-radius:10px;overflow:hidden;margin:18px 0 25px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--rose),#ffd0dc);transition:width .3s}
-    .question{font-size:1.25rem;font-weight:750;margin:0 0 18px}
-    .answers{display:grid;gap:10px}
-    .answer{width:100%;text-align:left;padding:15px 16px;border:1px solid #573347;border-radius:13px;background:#2a1b28;color:var(--cream);display:flex;gap:12px;align-items:flex-start}
-    .answer:hover{border-color:var(--pink);background:#382135}.answer.selected{border-color:var(--pink);background:#4a263b;box-shadow:inset 0 0 0 1px var(--pink)}
-    .letter{display:grid;place-items:center;flex:0 0 27px;height:27px;border-radius:50%;background:#4b2b40;color:#ffd5e0;font-size:.8rem;font-weight:800}
-    .quiz-controls{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
-    .quiz-controls .btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
-    .result{margin-top:18px;border-color:#a34b70;background:linear-gradient(145deg,#382033,#21151f)}
-    .result h3{font-size:1.7rem;margin:6px 0}.result p{color:#ead5df}.result .big-heart{font-size:2.4rem;color:var(--pink)}
-    .hidden{display:none!important}
-    .love-languages{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-    .language{border:1px solid var(--line);border-radius:16px;padding:16px 13px;background:#21151f}
-    .language .emoji{font-size:1.5rem}.language h3{font-size:.98rem;margin:8px 0 4px}.language p{font-size:.82rem;color:var(--muted);margin:0}
-    .letter-box{border:1px solid #7c405c;background:linear-gradient(130deg,#3a2033,#21151f);padding:clamp(24px,5vw,45px);border-radius:24px}
-    .letter-box p{font-family:Georgia,serif;font-size:clamp(1.15rem,2.5vw,1.55rem);line-height:1.7;margin:12px 0}
-    footer{border-top:1px solid #392536;padding:28px 0;color:var(--muted);font-size:.85rem}
-    .footer-inner{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-    @media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:30px;gap:24px}.love-card{min-height:300px}.steps{grid-template-columns:1fr}.love-languages{grid-template-columns:repeat(2,1fr)}.language:last-child{grid-column:span 2}.nav-note{display:none}}
-    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fffaf7">
+  <meta name="description" content="Sebuah ruang kecil untuk Sayang, tentang cinta, kenangan, dan cara kita saling memahami.">
+  <title>Untuk Sayang ♡</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="wrap">
-    <nav><div class="brand">OUR LITTLE <span>UNIVERSE ♡</span></div><div class="nav-note">dibuat dengan sedikit rindu dan banyak sayang</div></nav>
-    <header class="hero">
+  <header class="topbar">
+    <a class="brand" href="#home">untuk sayang <span>♡</span></a>
+    <nav aria-label="Navigasi utama">
+      <a href="#cerita">cerita</a>
+      <a href="#galeri">kenangan</a>
+      <a href="#love-language">love language</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy">
+        <p class="eyebrow">A LITTLE SPACE, JUST FOR YOU</p>
+        <h1>Hai, <span>Sayang.</span><br>Ini buat kamu.</h1>
+        <p class="hero-description">
+          Aku bikin tempat kecil ini buat nyimpen hal-hal tentang kita.
+          Nggak harus selalu sempurna, yang penting kita terus belajar
+          saling ngerti.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#cerita">Lihat kejutan kecil <span>↗</span></a>
+          <a class="text-link" href="#love-language">Kenali aku dan kamu ↓</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-label="Ilustrasi hati">
+        <div class="art-note note-top">for my favorite person</div>
+        <div class="heart-art" aria-hidden="true">♡</div>
+        <div class="art-note note-bottom">made with a little love</div>
+        <span class="spark spark-one">✳</span>
+        <span class="spark spark-two">✦</span>
+      </div>
+    </section>
+
+    <section class="section intro-section" id="cerita">
+      <div class="section-heading">
+        <p class="eyebrow">01 — A SMALL REMINDER</p>
+        <h2>Hal kecil, tapi<br>berarti buat aku.</h2>
+      </div>
+      <div class="intro-content">
+        <p>
+          Aku tahu, sayang itu nggak selalu soal kata-kata manis.
+          Kadang tentang dengerin cerita yang sama berulang kali,
+          nemenin saat capek, atau sekadar hadir tanpa harus punya
+          banyak hal buat dibicarain.
+        </p>
+        <p>
+          Aku juga masih belajar. Belajar ngerti apa yang bikin kamu
+          merasa disayang, belajar jadi pendengar yang lebih baik,
+          dan belajar kalau cara kita menerima cinta bisa aja beda.
+        </p>
+        <button class="button button-outline" id="surpriseBtn" type="button">
+          Ada pesan buat kamu ♡
+        </button>
+        <div class="surprise-message" id="surpriseMessage" hidden aria-live="polite">
+          <span class="message-heart">♡</span>
+          <p>
+            Kalau suatu hari kamu lagi capek sama dunia, kamu nggak harus
+            selalu terlihat kuat di depanku. Kamu boleh cerita, boleh
+            diam, boleh istirahat. Aku mungkin belum selalu tahu cara
+            terbaik buat bikin semuanya terasa ringan, tapi aku mau
+            terus belajar memahami kamu. Makasih ya, udah jadi bagian
+            dari cerita aku. 🤍
+          </p>
+          <span class="signature">— dari aku, buat kamu.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section gallery-section" id="galeri">
+      <div class="section-heading">
+        <p class="eyebrow">02 — OUR LITTLE ARCHIVE</p>
+        <h2>Beberapa hal<br>yang pengin aku simpan.</h2>
+        <p class="muted">Nggak harus momen besar. Yang sederhana juga punya tempatnya sendiri.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="photo-card">
+          <img src="photos/foto-1.jpg" alt="Kenangan pertama kita" loading="lazy">
+          <figcaption>
+            <span>01</span>
+            <span>momen favorit</span>
+          </figcaption>
+        </figure>
+        <figure class="photo-card photo-offset">
+          <img src="photos/foto-2.jpg" alt="Momen sederhana bersama" loading="lazy">
+          <figcaption>
+            <span>02</span>
+            <span>sesederhana itu</span>
+          </figcaption>
+        </figure>
+        <figure class="photo-card">
+          <img src="photos/foto-3.jpg" alt="Kenangan manis kita" loading="lazy">
+          <figcaption>
+            <span>03</span>
+            <span>masih banyak cerita</span>
+          </figcaption>
+        </figure>
+      </div>
+      <p class="gallery-hint">
+        Ganti foto contoh dengan foto kalian sendiri di folder <code>photos</code>.
+      </p>
+    </section>
+
+    <section class="section counter-section">
       <div>
-        <div class="eyebrow">a tiny love project, just for you</div>
-        <h1>Belajar<br>bahasa <em>cintamu.</em></h1>
-        <p class="lead">Katanya cinta nggak selalu harus diucapkan. Kadang ia hadir lewat waktu, perhatian kecil, pelukan, atau kalimat sederhana: “aku ada di sini, ya.” Yuk, kita kenali cara kita saling mencintai.</p>
-        <div class="actions"><a class="btn btn-primary" href="#pretest" style="text-decoration:none">Mulai pre-test ♡</a><a class="btn btn-ghost" href="#surat" style="text-decoration:none">Baca surat kecil</a></div>
+        <p class="eyebrow">A LITTLE COUNT OF US</p>
+        <h2>Sejauh ini,<br>kita sudah berjalan bersama...</h2>
+        <p class="muted">Masukkan tanggal mulai kalian buat menghitung harinya.</p>
       </div>
-      <aside class="love-card">
-        <div class="tiny">catatan kecil untuk kamu</div>
-        <div class="quote">“Aku nggak butuh hubungan yang selalu sempurna. Aku cuma ingin kita tetap memilih satu sama lain, bahkan di hari yang biasa-biasa saja.”</div>
-        <div class="signature">— dari aku, yang selalu belajar mencintaimu</div>
-      </aside>
-    </header>
-
-    <section id="cara">
-      <div class="section-head"><div class="eyebrow">our little journey</div><h2>Bukan ujian cinta.<br>Ini cara kita saling memahami.</h2><p>Jawab dengan jujur, bukan dengan jawaban yang terdengar paling romantis. Nggak ada nilai jelek di sini—yang ada cuma kesempatan untuk lebih mengerti satu sama lain.</p></div>
-      <div class="steps">
-        <article class="step"><div class="step-num">01 / PRE-TEST</div><h3>Kenali dirimu</h3><p>Pilih hal kecil yang paling bikin kamu merasa dicintai saat ini.</p></article>
-        <article class="step"><div class="step-num">02 / REFLEKSI</div><h3>Baca hasilnya</h3><p>Lihat kecenderungan love language-mu. Hasil ini bukan label mutlak, ya.</p></article>
-        <article class="step"><div class="step-num">03 / POST-TEST</div><h3>Coba pahami lagi</h3><p>Setelah membaca surat kecil ini, jawab lagi dan lihat apakah perspektifmu berubah.</p></article>
+      <div class="counter-card">
+        <label for="startDate">Tanggal mulai bersama</label>
+        <input id="startDate" type="date">
+        <p class="counter-number" id="dayCount" aria-live="polite">— <span>hari</span></p>
+        <p class="counter-caption" id="counterCaption">Pilih tanggal yang punya arti buat kalian ♡</p>
+        <button class="button button-dark button-full" id="saveDateBtn" type="button">
+          Simpan tanggal
+        </button>
+        <p class="small-note">Tanggal disimpan di browser perangkat ini.</p>
       </div>
     </section>
 
-    <section id="pretest">
-      <div class="section-head"><div class="eyebrow">01 — pre-test</div><h2>Sebelum kita mulai…</h2><p>Pilih satu jawaban di setiap pertanyaan. Pilih yang paling terasa seperti dirimu.</p></div>
-      <div class="quiz-panel">
-        <div class="quiz-top"><strong id="quizTitle">Pre-test · Pertanyaan 1 dari 5</strong><span class="pill" id="quizPill">belum selesai</span></div>
-        <div class="progress"><div class="bar" id="progressBar"></div></div>
-        <p class="question" id="questionText"></p>
-        <div class="answers" id="answers"></div>
-        <div class="quiz-controls"><button class="btn btn-ghost" id="backBtn" disabled>Kembali</button><button class="btn btn-primary" id="nextBtn" disabled>Berikutnya →</button></div>
+    <section class="section quiz-section" id="love-language">
+      <div class="section-heading">
+        <p class="eyebrow">03 — GETTING TO KNOW US</p>
+        <h2>Cara kita<br>merasa disayang.</h2>
+        <p class="muted">
+          Coba jawab dengan jujur, ya. Nggak ada jawaban benar atau salah.
+          Ini bukan tes ilmiah, cuma cara seru buat mulai ngobrol.
+        </p>
       </div>
-      <div class="result hidden" id="preResult" aria-live="polite"></div>
+
+      <div class="quiz-card" id="preCard">
+        <div class="quiz-topline">
+          <span class="quiz-label">PRE-TEST</span>
+          <span class="quiz-progress" id="preProgress">Belum dimulai</span>
+        </div>
+        <h3 id="preTitle">Menurut kamu, hal apa yang paling bikin kamu merasa disayang?</h3>
+        <p class="quiz-instruction" id="preInstruction">
+          Pilih satu jawaban yang paling menggambarkan perasaan kamu.
+        </p>
+        <div class="answer-list" id="preAnswers">
+          <button class="answer-option" type="button" data-start="pre">
+            Mulai jawab pertanyaan <span>→</span>
+          </button>
+        </div>
+        <div class="quiz-footer">
+          <button class="button button-outline" id="preBackBtn" type="button" disabled>Kembali</button>
+          <button class="button button-dark" id="preNextBtn" type="button" disabled>Berikutnya →</button>
+        </div>
+        <div class="quiz-result" id="preResult" hidden aria-live="polite"></div>
+      </div>
+
+      <div class="quiz-card post-card" id="postCard">
+        <div class="quiz-topline">
+          <span class="quiz-label">POST-TEST</span>
+          <span class="quiz-progress" id="postProgress">Setelah kamu siap</span>
+        </div>
+        <h3 id="postTitle">Sekarang, coba lihat lagi apa yang paling berarti buat kamu.</h3>
+        <p class="quiz-instruction" id="postInstruction">
+          Kamu bisa mengulang tes ini setelah beberapa waktu atau setelah
+          kalian ngobrol lebih dalam.
+        </p>
+        <div class="answer-list" id="postAnswers">
+          <p class="muted">Selesaikan pre-test dulu, ya. Hasilnya akan jadi pembanding.</p>
+        </div>
+        <div class="quiz-footer">
+          <button class="button button-outline" id="postBackBtn" type="button" disabled>Kembali</button>
+          <button class="button button-dark" id="postNextBtn" type="button" disabled>
+            Mulai post-test →
+          </button>
+        </div>
+        <div class="quiz-result" id="postResult" hidden aria-live="polite"></div>
+      </div>
+
+      <div class="comparison-card" id="comparison" hidden aria-live="polite">
+        <p class="eyebrow">YOUR LITTLE REFLECTION</p>
+        <h3>Yuk, lihat perjalanannya.</h3>
+        <div id="comparisonContent"></div>
+        <p class="comparison-note">
+          Hasil ini bukan label permanen. Kebutuhan kita bisa berubah,
+          dan ngobrol langsung tetap yang paling penting.
+        </p>
+        <button class="button button-outline" id="resetQuizBtn" type="button">
+          Ulangi dari awal
+        </button>
+      </div>
     </section>
 
-    <section id="surat">
-      <div class="section-head"><div class="eyebrow">a letter for you</div><h2>Kalau suatu hari kamu lupa…</h2></div>
-      <div class="letter-box">
-        <div class="tiny">dibaca pelan-pelan, ya ♡</div>
-        <p>Sayang, aku mungkin belum selalu tahu cara terbaik untuk membuatmu merasa dicintai. Kadang aku salah paham, kadang aku terlalu sibuk dengan pikiranku sendiri. Tapi bukan berarti perasaanku berkurang.</p>
-        <p>Aku ingin belajar mendengarkanmu tanpa buru-buru membela diri, memahami diammu tanpa langsung berprasangka, dan merayakan hal kecil yang membuatmu bahagia.</p>
-        <p>Aku nggak janji jadi pasangan paling sempurna. Aku ingin jadi seseorang yang mau bertumbuh bersamamu—yang tetap mengusahakan kita, bukan cuma saat semuanya mudah, tapi juga saat kita perlu belajar lagi.</p>
-        <p><strong>Kalau bahasa cintamu berbeda denganku, ajari aku, ya. Aku mau belajar menerjemahkan sayangku ke bahasa yang paling bisa kamu rasakan.</strong></p>
-        <p>Dengan banyak sayang,<br><em>orang yang senang sekali punya kamu.</em></p>
-      </div>
+    <section class="closing-section">
+      <span class="closing-heart">♡</span>
+      <p class="eyebrow">ONE LAST THING</p>
+      <h2>Nggak harus selalu sempurna.<br>Yang penting, kita mau saling belajar.</h2>
+      <p>Terima kasih sudah mampir ke ruang kecil ini, Sayang.</p>
+      <a href="#home" class="text-link">Balik ke atas ↑</a>
     </section>
+  </main>
 
-    <section id="posttest">
-      <div class="section-head"><div class="eyebrow">02 — post-test</div><h2>Sekarang, setelah membaca…</h2><p>Jawab lagi dengan perasaanmu saat ini. Bukan untuk membuktikan cinta, tetapi untuk melihat apakah ada hal yang sekarang kamu sadari.</p></div>
-      <div class="quiz-panel">
-        <div class="quiz-top"><strong id="postQuizTitle">Post-test · Pertanyaan 1 dari 5</strong><span class="pill" id="postQuizPill">siap mulai</span></div>
-        <div class="progress"><div class="bar" id="postProgressBar"></div></div>
-        <p class="question" id="postQuestionText">Siap menjawab dengan jujur?</p>
-        <div class="answers" id="postAnswers"></div>
-        <div class="quiz-controls"><button class="btn btn-ghost" id="postBackBtn" disabled>Kembali</button><button class="btn btn-primary" id="postNextBtn" disabled>Mulai post-test →</button></div>
-      </div>
-      <div class="result hidden" id="postResult" aria-live="polite"></div>
-      <div class="actions"><button class="btn btn-ghost" id="compareBtn" disabled>Bandingkan hasil ♡</button><button class="btn btn-primary" id="restartBtn">Ulangi dari awal</button></div>
-      <div class="result hidden" id="compareResult" aria-live="polite"></div>
-    </section>
-
-    <section id="five">
-      <div class="section-head"><div class="eyebrow">the five love languages</div><h2>Cinta punya banyak cara bicara.</h2><p>Love language bisa membantu membuka percakapan, tetapi bukan diagnosis dan bukan aturan baku. Kebutuhan kita juga bisa berubah sesuai situasi.</p></div>
-      <div class="love-languages">
-        <article class="language"><div class="emoji">💌</div><h3>Words of Affirmation</h3><p>Kata-kata tulus, apresiasi, dan reassurance.</p></article>
-        <article class="language"><div class="emoji">🕰️</div><h3>Quality Time</h3><p>Waktu berkualitas dengan perhatian penuh.</p></article>
-        <article class="language"><div class="emoji">🎁</div><h3>Receiving Gifts</h3><p>Hadiah kecil yang menunjukkan kita diingat.</p></article>
-        <article class="language"><div class="emoji">🫶</div><h3>Acts of Service</h3><p>Bantuan nyata dan usaha yang meringankan.</p></article>
-        <article class="language"><div class="emoji">🤍</div><h3>Physical Touch</h3><p>Sentuhan nyaman dengan persetujuan dan batas yang saling dihormati.</p></article>
-      </div>
-    </section>
-    <footer><div class="footer-inner"><span>OUR LITTLE UNIVERSE ♡</span><span>Made with intention, not perfection.</span></div></footer>
-  </div>
-<script>
-const languages = {
-  words: {name:"Words of Affirmation", emoji:"💌", desc:"Kamu merasa dicintai saat kata-kata tulus mengingatkanmu bahwa kamu berharga.", tip:"Coba ucapkan hal spesifik yang kamu hargai dari pasanganmu, bukan hanya “sayang kamu”."},
-  time: {name:"Quality Time", emoji:"🕰️", desc:"Perhatian penuh dan waktu bersama membuatmu merasa dekat dan diprioritaskan.", tip:"Sisihkan waktu tanpa distraksi—ngobrol, jalan kaki, atau menikmati hal sederhana berdua."},
-  gifts: {name:"Receiving Gifts", emoji:"🎁", desc:"Kamu tersentuh oleh benda kecil yang menunjukkan bahwa pasangan mengingatmu.", tip:"Hadiah nggak harus mahal. Catatan kecil atau camilan favorit pun bisa berarti."},
-  service: {name:"Acts of Service", emoji:"🫶", desc:"Usaha nyata dan bantuan yang tulus membuatmu merasa diperhatikan.", tip:"Tanyakan bantuan apa yang paling berarti, lalu lakukan tanpa membuatnya merasa berutang."},
-  touch: {name:"Physical Touch", emoji:"🤍", desc:"Sentuhan yang nyaman dan disepakati bisa membuatmu merasa aman serta dekat.", tip:"Tanyakan bentuk sentuhan yang disukai dan selalu hormati batas masing-masing."}
-};
-const qs = [
- {q:"Saat harimu berat, hal apa yang paling ingin kamu terima dari pasangan?", a:[["words","Kalimat yang menenangkan dan menguatkan"],["time","Ditemani tanpa harus melakukan sesuatu yang spesial"],["gifts","Kejutan kecil untuk membuatku tersenyum"],["service","Dibantu menyelesaikan hal yang bikin pusing"],["touch","Pelukan atau genggaman tangan, kalau aku nyaman"]]},
- {q:"Momen sederhana mana yang paling bikin kamu merasa disayang?", a:[["time","Ngobrol lama sambil lupa waktu"],["words","Mendengar dia bangga padaku"],["service","Dia ingat lalu membantu hal kecil"],["touch","Duduk dekat atau berpegangan tangan"],["gifts","Dia membawakan sesuatu yang pernah kusebut"]]},
- {q:"Kalau sedang berjauhan, apa yang paling kamu rindukan?", a:[["words","Pesan manis dan kabar bahwa aku dirindukan"],["time","Waktu khusus untuk telepon atau video call"],["gifts","Kenang-kenangan kecil darinya"],["service","Dia membantu mengurus sesuatu dari jauh"],["touch","Kedekatan fisik saat akhirnya bertemu"]]},
- {q:"Apa yang paling membuatmu merasa usahamu dihargai?", a:[["words","Dia mengucapkan terima kasih dengan tulus"],["time","Dia berhenti sejenak untuk fokus mendengarkanku"],["gifts","Dia memberi sesuatu yang personal"],["service","Dia ikut mengambil bagian tanpa disuruh"],["touch","Dia memberi afeksi dengan cara yang kusukai"]]},
- {q:"Pilih satu hal yang ingin lebih sering ada dalam hubungan kalian.", a:[["words","Lebih banyak apresiasi dan komunikasi yang meyakinkan"],["time","Lebih banyak waktu berdua yang berkualitas"],["gifts","Lebih banyak kejutan kecil penuh makna"],["service","Lebih banyak aksi nyata dan saling membantu"],["touch","Lebih banyak afeksi fisik yang nyaman bagi kami"]]}
-];
-const state={pre:{answers:[],i:0,done:false,score:null},post:{answers:[],i:0,done:false,score:null}};
-function setupQuiz(which){
- const isPre=which==="pre", s=state[which], prefix=isPre?"":"post";
- const els={title:document.getElementById(prefix+"QuizTitle"),pill:document.getElementById(prefix+"QuizPill"),bar:document.getElementById(prefix+"ProgressBar"),q:document.getElementById(prefix+"QuestionText"),answers:document.getElementById(prefix+"Answers"),back:document.getElementById(prefix+"BackBtn"),next:document.getElementById(prefix+"NextBtn"),result:document.getElementById(prefix+"Result")};
- function render(){
-   if(s.done)return;
-   const q=qs[s.i]; els.title.textContent=`${isPre?"Pre-test":"Post-test"} · Pertanyaan ${s.i+1} dari ${qs.length}`;
-   els.pill.textContent=`${s.answers.filter(Boolean).length}/${qs.length} terjawab`;els.bar.style.width=`${(s.i/qs.length)*100}%`;els.q.textContent=q.q;els.answers.innerHTML="";
-   q.a.forEach(([key,label],idx)=>{const b=document.createElement("button");b.className="answer"+(s.answers[s.i]===key?" selected":"");b.innerHTML=`<span class="letter">${String.fromCharCode(65+idx)}</span><span>${label}</span>`;b.onclick=()=>{s.answers[s.i]=key;render()};els.answers.appendChild(b)});
-   els.back.disabled=s.i===0;els.next.disabled=!s.answers[s.i];els.next.textContent=s.i===qs.length-1?"Lihat hasil ♡":"Berikutnya →";
- }
- function finish(){
-   const score={};s.answers.forEach(a=>score[a]=(score[a]||0)+1);s.score=score;s.done=true;
-   const top=Object.keys(score).sort((a,b)=>score[b]-score[a]);const winners=top.filter(k=>score[k]===score[top[0]]);
-   els.bar.style.width="100%";els.pill.textContent="selesai";els.title.textContent=isPre?"Pre-test selesai ♡":"Post-test selesai ♡";
-   els.q.textContent="Terima kasih sudah menjawab dengan jujur.";els.answers.innerHTML="";els.back.classList.add("hidden");els.next.classList.add("hidden");
-   els.result.classList.remove("hidden");els.result.innerHTML=`<div class="big-heart">♡</div><div class="tiny">hasil ${isPre?"pre-test":"post-test"} kamu</div><h3>${winners.map(k=>languages[k].emoji+" "+languages[k].name).join(" + ")}</h3><p>${winners.map(k=>languages[k].desc).join(" ")}</p><p><strong>Ide kecil untuk kalian:</strong> ${winners.map(k=>languages[k].tip).join(" ")}</p><p style="font-size:.85rem">Skor: ${Object.keys(languages).map(k=>`${languages[k].name} ${score[k]||0}`).join(" · ")}. Ini refleksi ringan, bukan label permanen.</p>`;
-   if(!isPre){document.getElementById("compareBtn").disabled=!state.pre.done;document.getElementById("compareResult").classList.add("hidden")}
- }
- els.back.onclick=()=>{if(s.i>0){s.i--;render()}};
- els.next.onclick=()=>{if(!s.answers[s.i])return;if(s.i<qs.length-1){s.i++;render()}else finish()};
- render();
-}
-setupQuiz("pre");
-let postInitialized=false;
-document.getElementById("postNextBtn").onclick=()=>{
- const s=state.post;
- if(!postInitialized){postInitialized=true;setupQuiz("post");return}
-};
-document.getElementById("compareBtn").onclick=()=>{
- const a=state.pre.score,b=state.post.score;if(!a||!b)return;
- const keys=Object.keys(languages), diff=keys.map(k=>({k,d:(b[k]||0)-(a[k]||0)})).sort((x,y)=>y.d-x.d);
- const box=document.getElementById("compareResult");box.classList.remove("hidden");
- const before=Object.keys(a).sort((x,y)=>a[y]-a[x])[0],after=Object.keys(b).sort((x,y)=>b[y]-b[x])[0];
- let msg=before===after?`Kecenderungan teratasmu tetap ${languages[before].name}. Mungkin kamu makin yakin, atau memang itu kebutuhan yang paling terasa.`:`Di pre-test, kecenderungan teratasmu ${languages[before].name}; di post-test, menjadi ${languages[after].name}. Bisa jadi surat tadi membantumu melihat kebutuhan lain—atau jawabanmu berubah karena suasana hati.`;
- box.innerHTML=`<div class="tiny">refleksi kita ♡</div><h3>Apa yang berubah?</h3><p>${msg}</p><p>Perubahan skor bukan berarti cinta bertambah atau berkurang. Jadikan ini pembuka obrolan: “Hal apa yang paling bikin kamu merasa dicintai belakangan ini?”</p><p style="font-size:.85rem">Perubahan skor (post dikurangi pre): ${diff.map(x=>`${languages[x.k].name}: ${x.d>0?"+":""}${x.d}`).join(" · ")}</p>`;
-};
-document.getElementById("restartBtn").onclick=()=>location.reload();
-</script>
+  <footer class="footer">
+    <span>dibuat dengan hati, untuk sayang ♡</span>
+    <span>little things matter.</span>
+  </footer>
 </body>
 </html>

@@ -524,7 +524,7 @@ code {
 
 .answer-option {
   display: flex;
-  width: auto;
+  width: 100%;
   min-height: 54px;
   height: auto;
   align-items: center;
@@ -556,7 +556,7 @@ code {
 }
 
 .answer-option span {
-  flex: 0 0 auto;
+  flex: auto;
   color: var(--accent);
 }
 

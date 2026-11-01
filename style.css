@@ -540,6 +540,18 @@ code {
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
+.answer-option span,
+.answer-option p {
+  flex: 1;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.answer-option .icon-heart,
+.answer-option svg {
+  flex-shrink : 0;
+}
+
 .answer-option:hover:not(:disabled) {
   border-color: #d9a3a6;
   background: #fff8f6;

@@ -540,16 +540,6 @@ code {
   transition: border-color 0.2s ease, background 0.2s ease;
 }
 
-.answer-option span,
-.answer-option p 
-.answer-option .text-content { 
-  flex: 1;
-  min-width: 0;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-}
-
 .answer-option:hover:not(:disabled) {
   border-color: #d9a3a6;
   background: #fff8f6;
@@ -566,6 +556,11 @@ code {
 }
 
 .answer-option span {
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
   flex: 0 0 auto;
   color: var(--accent);
 }

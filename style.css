@@ -541,15 +541,13 @@ code {
 }
 
 .answer-option span,
-.answer-option p {
+.answer-option p 
+.answer-option .text-content { 
   flex: 1;
+  min-width: 0;
   word-break: break-word;
   overflow-wrap: break-word;
-}
-
-.answer-option .icon-heart,
-.answer-option svg {
-  flex-shrink : 0;
+  white-space: normal;
 }
 
 .answer-option:hover:not(:disabled) {

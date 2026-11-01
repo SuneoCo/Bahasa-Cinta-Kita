@@ -556,12 +556,7 @@ code {
 }
 
 .answer-option span {
-  flex: 1;
-  min-width: 0;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  white-space: normal;
-  flex: 0 0 auto;
+  flex: auto;
   color: var(--accent);
 }
 

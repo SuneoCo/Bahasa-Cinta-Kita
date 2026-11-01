@@ -524,7 +524,7 @@ code {
 
 .answer-option {
   display: flex;
-  width: 100%;
+  width: auto;
   min-height: 54px;
   height: auto;
   align-items: center;
@@ -532,7 +532,7 @@ code {
   gap: 15px;
   padding: 14px 17px;
   border: 1px solid var(--line);
-  border-radius: 13px;
+  border-radius: 15px;
   background: white;
   color: var(--ink);
   font-size: 13px;

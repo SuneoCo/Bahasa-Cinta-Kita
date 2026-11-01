@@ -556,7 +556,7 @@ code {
 }
 
 .answer-option span {
-  flex: auto;
+  flex: 0 0 auto;
   color: var(--accent);
 }
 
